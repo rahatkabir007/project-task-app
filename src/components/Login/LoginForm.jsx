@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import {  Input, Button, message } from 'antd';
+import { Input, Button, message } from 'antd';
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
 import useUserStore from '@/store/user';
 import Cookies from 'js-cookie';
+import { loginUser, getUserByEmail } from '@/ReactQueryApis/api';
+// import { getUserByEmail } from '@/ReactQueryApis/api';
 
 const LoginForm = () => {
     const { control, handleSubmit, formState: { errors } } = useForm();
@@ -12,38 +14,25 @@ const LoginForm = () => {
     const queryClient = useQueryClient();
     const setUser = useUserStore(state => state.setUser);
 
-    const loginMutation = useMutation(
-        async (data) => {
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            const { token } = await response.json();
-            return token;
+    const loginMutation = useMutation(loginUser, {
+        onSuccess: async (token, variables) => {
+            if (!token) {
+                message.error('User not found. Please register.');
+                router.push('/register');
+            } else {
+                const userData = await getUserByEmail(variables.email);
+                Cookies.set('user', JSON.stringify(userData));
+                setUser(userData);
+                queryClient.invalidateQueries('user');
+                Cookies.set('token', token);
+                router.push('/');
+            }
         },
-        {
-            onSuccess: async (token, variables) => {
-                if (!token) {
-                    message.error('User not found. Please register.');
-                    router.push('/register');
-                } else {
-                    Cookies.set('token', token);
-                    const userResponse = await fetch(`/api/user?email=${variables.email}`);
-                    const userData = await userResponse.json();
-                    Cookies.set('user', JSON.stringify(userData));
-
-                    setUser(userData);
-                    queryClient.invalidateQueries('user');
-                    router.push('/');
-                }
-            },
-            onError: (error) => {
-                console.error('Login error:', error);
-                message.error('Login failed. Please check your credentials and try again.');
-            },
-        }
-    );
+        onError: (error) => {
+            console.error('Login error:', error);
+            message.error('Login failed. Please check your credentials and try again.');
+        },
+    });
 
     const onSubmit = (data) => {
         loginMutation.mutate(data);

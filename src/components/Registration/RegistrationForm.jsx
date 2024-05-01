@@ -2,35 +2,23 @@ import { Controller, useForm } from 'react-hook-form';
 import {  Input, Button, message } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { registerUser } from '@/ReactQueryApis/api';
 
 const RegistrationForm = () => {
   const { handleSubmit, formState: { errors },control } = useForm();
 
   const router = useRouter();
-  const registerMutation = useMutation(
-    async (data) => {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        const { error } = await response.json();
-        throw new Error(error);
-      }
+  
+  const registerMutation = useMutation(registerUser, {
+    onSuccess: () => {
+      message.success('Registration successful. Please log in.');
+      router.push('/login');
     },
-    {
-      onSuccess: () => {
-        message.success('Registration successful. Please log in.');
-        router.push('/login');
-      },
-      onError: (error) => {
-        console.error('Registration error:', error);
-        message.error('Registration failed. Please try again.');
-      },
-    }
-  );
+    onError: (error) => {
+      console.error('Registration error:', error);
+      message.error('Registration failed. Please try again.');
+    },
+  });
 
   const onSubmit = (data) => {
     registerMutation.mutate(data);
