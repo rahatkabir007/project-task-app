@@ -1,14 +1,53 @@
 {
   "users": [
     {
-      "name": "MD. Rahat Kabir",
+      "name": "Rahat Kabir",
       "email": "rahatkabir04@gmail.com",
-      "password": "121212"
-    },
+      "password": "121212",
+      "id": "36f5002a-3c82-4576-9dfd-b3e6e6019e21"
+    }
+  ],
+  "projects": [
     {
-      "name": "rahat",
-      "email": "rahat@gmail.com",
-      "password": "121212"
+      "id": "36f5002a-3c82-4576-9dfd-b3e6e6019e21",
+      "name": "Programming Hero",
+      "description": "An Educational Platform for Programmers",
+      "team_members": [
+        {
+          "id": "36f5002a-3c82-4576-9dfd-b3e6e6019e21",
+          "name": "Rahat",
+          "email": "rahatkabir@gmail.com"
+        },
+        {
+          "id": "36f5002a-3c82-4576-9dfd-b3e6e6019e22",
+          "name": "Shumon",
+          "email": "shumon@gmail.com"
+        },
+        {
+          "id": "36f5002a-3c82-4576-9dfd-b3e6e6019e23",
+          "name": "Reaz",
+          "email": "reaz@gmail.com"
+        }
+      ],
+      "tasks": [
+        {
+          "name": "Implement Slider",
+          "description": "Implement Slider With React Slick/ Swiper / Splide",
+          "deadline": "05/04/2025",
+          "assigned_members": [
+            {
+              "id": "36f5002a-3c82-4576-9dfd-b3e6e6019e22",
+              "name": "Shumon",
+              "email": "shumon@gmail.com"
+            },
+            {
+              "id": "36f5002a-3c82-4576-9dfd-b3e6e6019e23",
+              "name": "Reaz",
+              "email": "reaz@gmail.com"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

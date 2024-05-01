@@ -1,12 +1,12 @@
-import Logout from '@/components/Logout/Logout'
 import React from 'react'
+import Logout from '@/components/Logout/Logout'
 
 const Homepage = () => {
 
  
   return (
     <div>
-   hello <Logout/>
+    <Logout/>
     </div>
   )
 }

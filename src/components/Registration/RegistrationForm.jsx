@@ -129,7 +129,7 @@ const RegistrationForm = () => {
               <form onSubmit={handleSubmit(onSubmit)} >
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <label for="" className="text-xs font-semibold px-1">Name</label>
+                    <label htmlFor="" className="text-xs font-semibold px-1">Name</label>
                     <div className="flex">
                       <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><UserOutlined /></div>
                       <Controller
@@ -146,7 +146,7 @@ const RegistrationForm = () => {
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-5">
-                    <label for="" className="text-xs font-semibold px-1">Email</label>
+                    <label htmlFor="" className="text-xs font-semibold px-1">Email</label>
                     <div className="flex">
                       <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><MailOutlined /></div>
                       <Controller
@@ -163,7 +163,7 @@ const RegistrationForm = () => {
                 </div>
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-12">
-                    <label for="" className="text-xs font-semibold px-1">Password</label>
+                    <label htmlFor="" className="text-xs font-semibold px-1">Password</label>
                     <div className="flex">
                       <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><LockOutlined /></div>
                       <Controller
