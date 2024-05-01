@@ -1,5 +1,5 @@
 import { QueryClientProvider, Hydrate } from 'react-query'
-import queryClient from './react-query-config'
+import queryClient from '../../react-query-config'
 import "@/styles/globals.css";
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
