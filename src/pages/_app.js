@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import useUserStore from '@/store/user';
 
 export default function App({
   Component,
@@ -11,6 +12,7 @@ export default function App({
 }) {
 
   const router = useRouter()
+  const setUser = useUserStore(state => state.setUser);
 
   const checkToken = () => {
     const token = Cookies.get('token');
@@ -21,9 +23,20 @@ export default function App({
 
   useEffect(() => {
     checkToken()
-  },[])
+  }, [])
 
-  
+
+  useEffect(() => {
+    const userData = Cookies.get('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+      console.log("🚀 ~ useEffect ~ user:", user)
+      queryClient.setQueryData('user', user);
+      setUser(user)
+    }
+  }, [])
+
+
   return (
     <>
       <QueryClientProvider client={queryClient}>

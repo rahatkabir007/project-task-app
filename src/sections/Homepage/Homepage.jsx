@@ -1,12 +1,14 @@
+import Navbar from '@/components/Navbar/Navbar'
 import React from 'react'
-import Logout from '@/components/Logout/Logout'
+
 
 const Homepage = () => {
 
  
   return (
     <div>
-    <Logout/>
+      <Navbar />
+   
     </div>
   )
 }

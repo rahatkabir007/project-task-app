@@ -3,11 +3,11 @@ import { create } from 'zustand'
 
 const useUserStore = create(set => ({
     //here are the states
-    user: null,
+    user: {},
 
 
     // here are the actions
-    setUser: (data) => set({ data }),
+    setUser: (data) => set({ user: data }),
     
 }))
 

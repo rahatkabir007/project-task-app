@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { v4 as uuidv4 } from 'uuid';
 
 const dbPath = path.resolve('./data/db.json');
 
@@ -9,10 +8,9 @@ export default function handler(req, res) {
         try {
             const userData = req.body;
             const dbData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-            if (dbData.users.some(user => user.email === userData.email)) {
+            if (dbData.users.some(user => user.email === userData.email)) { 
                 return res.status(409).json({ error: 'User already exists' });
             }
-            userData.id = uuidv4();
             dbData.users.push(userData);
             fs.writeFileSync(dbPath, JSON.stringify(dbData, null, 2));
             res.status(201).json({ message: 'User registered successfully' });

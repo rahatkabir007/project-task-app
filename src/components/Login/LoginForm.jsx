@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Input, Button, message } from 'antd';
+import { Input, message } from 'antd';
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
-import useUserStore from '@/store/user';
 import Cookies from 'js-cookie';
 import { loginUser, getUserByEmail } from '@/ReactQueryApis/api';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
@@ -15,7 +14,7 @@ const LoginForm = () => {
     const { control, handleSubmit, formState: { errors } } = useForm();
     const router = useRouter();
     const queryClient = useQueryClient();
-    const setUser = useUserStore(state => state.setUser);
+  
 
     const loginMutation = useMutation(loginUser, {
         onSuccess: async (token, variables) => {
@@ -24,8 +23,8 @@ const LoginForm = () => {
                 router.push('/Login');
             } else {
                 const userData = await getUserByEmail(variables.email);
+                console.log("🚀 ~ onSuccess: ~ userData:", userData)
                 Cookies.set('user', JSON.stringify(userData));
-                setUser(userData);
                 queryClient.invalidateQueries('user');
                 Cookies.set('token', token);
                 router.push('/');

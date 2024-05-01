@@ -16,7 +16,7 @@ export default function handler(req, res) {
                 res.status(500).json({ error: 'Wrong password' });
             } else {
                 const token = jwt.sign({ userId: user.name }, 'secret_key');
-                res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
+                // res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
 
                 res.status(200).json({ token });
             }
