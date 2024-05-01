@@ -1,1 +1,1 @@
-This is a next js boilerplate with rtk query and tailwind
+This is  next js with react query, zustand and tailwind
