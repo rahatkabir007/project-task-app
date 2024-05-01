@@ -1,3 +1,4 @@
+import Logout from '@/components/Logout/Logout'
 import React from 'react'
 
 const Homepage = () => {
@@ -5,7 +6,7 @@ const Homepage = () => {
  
   return (
     <div>
-   hello
+   hello <Logout/>
     </div>
   )
 }

@@ -8,16 +8,14 @@ export default function handler(req, res) {
         try {
             const dbData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
             const { email, password } = req.body;
-            console.log(req.body)
-            const user = dbData.users.find(u => u.email === email && u.password === password);
+            const user = dbData.users.find(u => u.email === email);
 
             if (!user) {
-                res.status(401).json({ error: 'Invalid email or password' });
+                res.status(500).json({ error: 'Invalid email' });
+            } else if (user.password !== password) {
+                res.status(500).json({ error: 'Wrong password' });
             } else {
-                // Generate a token for the authenticated user
-                const token = jwt.sign({ userId: user.name }, 'your_secret_key');
-
-                // Set the token in a HttpOnly cookie
+                const token = jwt.sign({ userId: user.name }, 'secret_key');
                 res.setHeader('Set-Cookie', `token=${token}; HttpOnly`);
 
                 res.status(200).json({ token });

@@ -1,17 +1,14 @@
-import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import useLoginStore from '@/store/login'
-
+import Cookies from 'js-cookie';
 const Logout = () => {
-    const logout = useLoginStore(state => state.logout)
-    const router = useRouter()
+    const router = useRouter();
 
-    useEffect(() => {
-        logout()
-        router.push('/login')
-    }, [])
+    const logout = () => {
+        Cookies.remove('token');
+        router.push('/login');
+    };
 
-    return null
-}
+    return <button onClick={logout}>Logout</button>;
+};
 
 export default Logout
