@@ -1,0 +1,1 @@
+This is a next js boilerplate with rtk query and tailwind
